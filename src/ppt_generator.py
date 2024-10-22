@@ -38,5 +38,10 @@ def generate_presentation(powerpoint_data, template_path: str, output_path: str)
                     if shape.placeholder_format.type == 18:
                         shape.insert_picture(image_full_path)
                         break
+
+    output_dir = os.path.dirname(output_path)
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+            
     prs.save(output_path)
     print(f"Presentation saved to '{output_path}'")
