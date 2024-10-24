@@ -12,6 +12,8 @@ from langchain_ollama.chat_models import ChatOllama  # 导入 ChatOllama 模型
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage, AIMessage  # 导入人类消息和 AI 消息类
 from langchain_core.runnables.history import RunnableWithMessageHistory
+import os
+from dotenv import load_dotenv
 
 # 定义全局变量
 chatbot_with_history = None  # 全局变量，用于存储聊天机器人实例
@@ -133,4 +135,8 @@ if __name__ == "__main__":
 
     create_chatbot()
 
-    chat_ptt_app.launch(auth=("admin", "82747612"))  # 启动 Gradio 应用并设置访问密码
+    # 密码读取.env文件
+    # 获取环境变量
+    load_dotenv()
+    admin_password = os.getenv("ADMIN_PASSWORD")
+    chat_ptt_app.launch(auth=("admin", admin_password))  # 启动 Gradio 应用并设置访问密码
